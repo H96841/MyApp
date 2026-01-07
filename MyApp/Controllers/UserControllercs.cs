@@ -42,7 +42,7 @@ namespace MyApp.Controllers
             return NoContent();
         }
 
-        [HttpPut("{id:int}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, [FromBody] UpdateUserDto dto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -58,7 +58,7 @@ namespace MyApp.Controllers
             }
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
             await _service.DeleteAsync(id);

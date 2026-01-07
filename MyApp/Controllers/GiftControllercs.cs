@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using MyApp.Dto;
+using MyApp.Models;
+using MyApp.Service;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using MyApp.Dto;
-using MyApp.Service;
 
 namespace MyApp.Controllers
 {
@@ -26,7 +27,7 @@ namespace MyApp.Controllers
             return Ok(gifts);
         }
 
-        // GET: api/gift/5
+        //GET: api/gift/5
         [HttpGet("{id:int}")]
         public async Task<ActionResult<GetGiftDto>> GetById(int id)
         {
@@ -41,12 +42,12 @@ namespace MyApp.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            await _giftService.CreateAsync(dto);
+            var res=await _giftService.CreateAsync(dto);
 
             // Service currently does not return the created resource or id.
             // Return 204 No Content to acknowledge creation; change to CreatedAtAction
             // when the service returns the created resource or id.
-            return NoContent();
+            return CreatedAtAction(nameof(GetById), new { id = res.Id }, dto);
         }
 
         // PUT: api/gift/5
@@ -62,9 +63,11 @@ namespace MyApp.Controllers
                 await _giftService.UpdateAsync(dto);
                 return NoContent();
             }
-            catch (KeyNotFoundException)
+
+
+            catch (ArgumentException ex)
             {
-                return NotFound();
+                return BadRequest(new {message=ex.Message});
             }
         }
 

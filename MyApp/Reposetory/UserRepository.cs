@@ -20,7 +20,7 @@ namespace MyApp.Repository
         public async Task<IEnumerable<User>> GetAllAsync()
         {
             return await _context.Users
-                .Include(u => u.Purchases)
+                //.Include(u => u.Purchases)
                 .Include(u => u.Winner)
                 .ToListAsync();
         }
@@ -28,7 +28,7 @@ namespace MyApp.Repository
         public async Task<User?> GetByIdAsync(int id)
         {
             return await _context.Users
-                .Include(u => u.Purchases)
+            //    .Include(u => u.Purchases)
                 .Include(u => u.Winner)
                 .FirstOrDefaultAsync(u => u.Id == id);
         }

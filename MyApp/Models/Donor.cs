@@ -10,8 +10,8 @@ namespace MyApp.Models
         
         [EmailAddress]
         public string Email { get; set; }
-        [Phone]
+       
         public string Phone {  get; set; }
-        public List <Gift> Gifts { get; set; }
+        public List<Gift> Gifts { get; set; } = new List<Gift>();
     }
 }

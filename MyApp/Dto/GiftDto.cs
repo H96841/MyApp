@@ -10,6 +10,8 @@ namespace MyApp.Dto
        
         //public Category Category { get; set; }
         public decimal Price { get; set; }
+        public string Description { get; set; }
+
         public string ImageUrl { get; set; }
         
         //public Donor Donor { get; set; }
@@ -21,7 +23,8 @@ namespace MyApp.Dto
         public string Name { get; set; }
         [Required]
         public int CategoryId { get; set; }
-       
+        public string Description { get; set; }
+
         [Required]
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
@@ -36,6 +39,7 @@ namespace MyApp.Dto
         [Required]
         public string Name { get; set; }
         public int CategoryId { get; set; }
+        public string Description { get; set; }
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
         public int DonorId { get; set; }

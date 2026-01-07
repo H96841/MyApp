@@ -30,17 +30,25 @@ namespace MyApp.Repository
                 .FirstOrDefaultAsync(g => g.Id == id);
         }
 
-        public async Task AddAsync(Gift gift)
+
+
+        public async Task<Gift> AddAsync(Gift gift)
         {
             await _context.Gifts.AddAsync(gift);
             await _context.SaveChangesAsync();
+            return gift;
         }
+
+
 
         public async Task UpdateAsync(Gift gift)
         {
             _context.Gifts.Update(gift);
             await _context.SaveChangesAsync();
         }
+
+
+
 
         public async Task DeleteAsync(int id)
         {

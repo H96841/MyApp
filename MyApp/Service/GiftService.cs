@@ -8,7 +8,7 @@ using MyApp.Repository;
 
 namespace MyApp.Service
 {
-    public class GiftService
+    public class GiftService: IGiftService
     {
         private readonly IGiftRepository _giftRepository;
 
@@ -29,7 +29,7 @@ namespace MyApp.Service
             return gift is null ? null : MapToGetGiftDto(gift);
         }
 
-        public async Task CreateAsync(CreateGiftDto dto)
+        public async Task<Gift> CreateAsync(CreateGiftDto dto)
         {
             if (dto is null) throw new ArgumentNullException(nameof(dto));
 
@@ -39,10 +39,11 @@ namespace MyApp.Service
                 CategoryId = dto.CategoryId,
                 Price = dto.Price,
                 ImageUrl = dto.ImageUrl ?? string.Empty,
-                DonorId = dto.DonorId
+                DonorId = dto.DonorId,
+                Description = dto.Description,
             };
 
-            await _giftRepository.AddAsync(gift);
+            return await _giftRepository.AddAsync(gift);
         }
 
         public async Task UpdateAsync(UpdateGiftDto dto)

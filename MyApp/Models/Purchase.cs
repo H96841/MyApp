@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyApp.Models
 {
@@ -6,11 +7,15 @@ namespace MyApp.Models
     {
         public int Id { get; set; }
 
-        [Required]
+
+        [ForeignKey("User")]
         public int UserId { get; set; }
         public User User { get; set; }
-        public decimal PriceTicket {  get; set; }
-        public List<int> GiftsId { get; set; } = new List<int>();
-        public DateTime PurchaseDate {  get; set; }
+        [ForeignKey("Gift")]
+        public int GiftId { get; set; }
+        public Gift Gift { get; set; }
+
+        public int Quantity { get; set; }
+        public DateTime PurchaseDate {  get; set; }= DateTime.Now;
     }
 }

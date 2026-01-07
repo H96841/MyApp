@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MyApp.Models
 {
@@ -9,9 +11,12 @@ namespace MyApp.Models
         [Required]
         public string Name { get; set; } = null!;
 
-        [Required]
-        public int CategoryId { get; set; }
+        public string Description { get; set; } = null!;
 
+        [Required]  
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
+    
         // Navigation property required by EF and by your repository Include(...)
         public Category Category { get; set; } = null!;
 
@@ -20,7 +25,15 @@ namespace MyApp.Models
         public string ImageUrl { get; set; } = string.Empty;
 
         [Required]
+        [ForeignKey("Donor")]
         public int DonorId { get; set; }
         public Donor Donor { get; set; } = null!;
+
+        [AllowNull]
+        [ForeignKey("Winner")]
+        public int? WinnerId { get; set; }
+        public Winner Winner { get; set; } = null!;
+
+
     }
 }

@@ -40,9 +40,10 @@ namespace MyApp.Service
                 Email = dto.Email,
                 UserName = dto.UserName,
                 Phone = dto.Phone,
-                Password = dto.Password,
-                Purchases = new List<Purchase>(),
-                Winner = new List<Winner>()
+                Password = dto.Password
+                //,
+                //Purchases = new List<Purchase>(),
+                //Winner = new List<Winner>()
             };
 
             await _repo.AddAsync(user);
